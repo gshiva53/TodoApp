@@ -88,3 +88,4 @@
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/TodoApp.pdb
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/TodoApp.genruntimeconfig.cache
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/ref/TodoApp.dll
+/home/shiva/TodoApp/backend/obj/Debug/net8.0/TodoApp.sourcelink.json

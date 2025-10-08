@@ -1,8 +1,6 @@
 import { createResource, createSignal, For } from "solid-js";
 import TaskCard from "./TaskCard";
 
-// 1. Create a card which shows the Task Id, Task Name, Task Status
-// 2. Get all the tasks when the application mounts
 // 3. Editing the task and clicking save should send the post request to
 // 	save the task.
 // 4. Filter tasks by the complete and incompleted tasks
@@ -60,10 +58,10 @@ const TodoItems = () => {
           `HTTP: ${response.status} status: ${response.statusText}`,
         );
       }
-      response = response.json();
+      // response = response.json();
       console.log("deleteTodoItem called");
       refetch();
-      return response;
+      // return response;
     } catch (error) {
       console.log(`Error occured while saving task: ${error}`);
       setPostError(`${error.name}: ${error.message}`);
