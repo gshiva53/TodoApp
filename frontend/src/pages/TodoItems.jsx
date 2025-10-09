@@ -1,13 +1,26 @@
-import { createResource, createSignal, For } from "solid-js";
+import { createResource, createSignal, For, Show } from "solid-js";
 import TaskCard from "./TaskCard";
+import CreateTaskCard from "./CreateTaskCard";
 
 // 3. Editing the task and clicking save should send the put request to
 // 	save the task.
+// . When the task name is clicked then it changes into input field and
+// 	sends an update request on input focus change.
+// . User can mark the task complete or incomplete.
+// . The task cards are responsive - md/lg task cards for bigger screens
+// 	sm cards for smaller screens
+// . New task can't be created with an empty name.
+// . Do users need to see the Id of the task ?
+// . The Create/Delete/Update buttons should show the status of the
+// 	request maybe ?
+// .
 // . User can create a new task which is then posted and saved.
 // . user can mark the task complete or incomplete
 // . Filter tasks by the complete and incompleted tasks
 const TodoItems = () => {
   const [postError, setPostError] = createSignal(null);
+  const [showCreateTaskComponent, setShowCreateTaskComponent] =
+    createSignal(false);
 
   const fetchTodoItems = async () => {
     try {
@@ -74,15 +87,16 @@ const TodoItems = () => {
     }
   };
 
-  const postTodoItem = async () => {
+  const postTodoItem = async (name, isComplete) => {
+    const boolIsComplete = isComplete === "false" ? false : true;
     const req = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Get some things for home office setup",
-        isComplete: false,
+        name: String(name),
+        isComplete: boolIsComplete,
       }),
     };
 
@@ -146,6 +160,15 @@ const TodoItems = () => {
 
   return (
     <div>
+      <button
+        class="bg-blue-200 p-2 m-4 w-sm"
+        onClick={() => setShowCreateTaskComponent(!showCreateTaskComponent())}
+      >
+        Create Task
+      </button>
+      <Show when={showCreateTaskComponent()}>
+        <CreateTaskCard postTodoItem={postTodoItem} />
+      </Show>
       <For each={todos()} fallback={<div>Loading...</div>}>
         {(todo) => (
           <TaskCard
@@ -158,9 +181,6 @@ const TodoItems = () => {
           />
         )}
       </For>
-      <button class="bg-blue-200 p-2 m-4" onClick={postTodoItem}>
-        Save Task
-      </button>
       <Show when={postError()}>
         <p>{postError()}</p>
       </Show>
