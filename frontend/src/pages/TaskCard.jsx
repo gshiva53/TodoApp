@@ -4,7 +4,20 @@ const TaskCard = (props) => {
       <div className="w-sm border-2 bg-stone-200 m-2 text-center">
         <p>{props.id}</p>
         <p>{props.name}</p>
-        <input type="text" onChange={props.postTodoItem}>
+        <input
+          type="text"
+          onChange={(e) => {
+            props.updateTodoItem(props.id, props.isComplete, e);
+          }}
+          //	[
+          //            props.updateTodoItem,
+          //            props.id,
+          //            // Solid automatically passes the event as the
+          //            // last argument to the handler function.
+          //            // The name can be derived from the event.
+          //            props.isComplete,
+          //          ]}
+        >
           {props.name}
         </input>
         <p>{props.isComplete}</p>

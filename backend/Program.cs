@@ -60,14 +60,16 @@ static async Task<IResult> UpdateTodo(int id, Todo inputTodo, TodoDb db)
 {
     var todo = await db.Todos.FindAsync(id);
 
-    if (todo is null) return Results.NotFound();
+    Console.WriteLine($"todo: {todo.Id} {todo.Name} {todo.IsComplete}");
+    if (todo is null) return TypedResults.NotFound();
 
     todo.Name = inputTodo.Name;
     todo.IsComplete = inputTodo.IsComplete;
 
+    Console.WriteLine($"todo: {todo.Id} {todo.Name} {todo.IsComplete}");
     await db.SaveChangesAsync();
 
-    return Results.NoContent();
+    return TypedResults.Ok();
 }
 
 static async Task<IResult> DeleteTodo(int id, TodoDb db)
@@ -76,9 +78,9 @@ static async Task<IResult> DeleteTodo(int id, TodoDb db)
     {
         db.Todos.Remove(todo);
         await db.SaveChangesAsync();
-        return Results.NoContent();
+        return TypedResults.Ok();
     }
-    return Results.NotFound();
+    return TypedResults.NotFound();
 }
 
 app.Run();

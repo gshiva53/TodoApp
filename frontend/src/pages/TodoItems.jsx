@@ -1,9 +1,10 @@
 import { createResource, createSignal, For } from "solid-js";
 import TaskCard from "./TaskCard";
 
-// 3. Editing the task and clicking save should send the post request to
+// 3. Editing the task and clicking save should send the put request to
 // 	save the task.
-// 4. Filter tasks by the complete and incompleted tasks
+// . User can create a new task which is then posted and saved.
+// . Filter tasks by the complete and incompleted tasks
 const TodoItems = () => {
   const [postError, setPostError] = createSignal(null);
 
@@ -11,6 +12,39 @@ const TodoItems = () => {
     let rawData = await fetch("http://192.168.4.24:5000/todoitems");
     let todos = rawData.json();
     return todos;
+  };
+
+  const updateTodoItem = async (id, isComplete, inputEvent) => {
+    const req = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: Number(id),
+        name: String(inputEvent.target.value),
+        isComplete: Boolean(isComplete),
+      }),
+    };
+
+    try {
+      let response = await fetch(
+        `http://192.168.4.24:5000/todoitems/${id}`,
+        req,
+      );
+      if (!response.ok) {
+        throw new Error(
+          `HTTP: ${response.status} status: ${response.statusText}`,
+        );
+      }
+      response = response.json();
+      console.log("updateTodoItem called");
+      refetch();
+      return response;
+    } catch (error) {
+      setPostError(`${error.name}: ${error.message}`);
+      throw error;
+    }
   };
 
   const postTodoItem = async () => {
@@ -77,18 +111,20 @@ const TodoItems = () => {
         {(todo) => (
           <TaskCard
             id={String(todo.id)}
-            name={todo.name}
+            name={String(todo.name)}
             postTodoItem={postTodoItem}
             isComplete={String(todo.isComplete)}
             deleteTodoItem={deleteTodoItem}
+            updateTodoItem={updateTodoItem}
           />
         )}
       </For>
+      <p>todos: {todos()}</p>
       <button class="bg-blue-200 p-2 m-4" onClick={postTodoItem}>
         Save Task
       </button>
       <Show when={postError()}>
-        <p>Saving Task status: {postError()}</p>
+        <p>{postError()}</p>
       </Show>
     </div>
   );
