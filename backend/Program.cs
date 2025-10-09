@@ -53,20 +53,18 @@ static async Task<IResult> PostTodo(Todo todo, TodoDb db)
     db.Todos.Add(todo);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/{todo.Id}", todo);
+    return TypedResults.Created($"/{todo.Id}", todo);
 }
 
 static async Task<IResult> UpdateTodo(int id, Todo inputTodo, TodoDb db)
 {
     var todo = await db.Todos.FindAsync(id);
 
-    Console.WriteLine($"todo: {todo.Id} {todo.Name} {todo.IsComplete}");
     if (todo is null) return TypedResults.NotFound();
 
     todo.Name = inputTodo.Name;
     todo.IsComplete = inputTodo.IsComplete;
 
-    Console.WriteLine($"todo: {todo.Id} {todo.Name} {todo.IsComplete}");
     await db.SaveChangesAsync();
 
     return TypedResults.Ok();
