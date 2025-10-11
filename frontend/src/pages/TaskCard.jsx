@@ -1,6 +1,7 @@
 import { createSignal, Show } from "solid-js";
 
 const TaskCard = (props) => {
+  const [inputElementRef, setInputElementRef] = createSignal(null);
   const [showTaskNameAsInput, setShowTaskNameAsInput] = createSignal(false);
   const [taskStatus, setTaskStatus] = createSignal(null);
 
@@ -13,19 +14,27 @@ const TaskCard = (props) => {
           className="w-xs m-2"
           when={showTaskNameAsInput()}
           fallback={
-            <p onClick={() => setShowTaskNameAsInput(true)}>{props.name}</p>
+            <p
+              onClick={() => {
+                setShowTaskNameAsInput(true);
+                inputElementRef().focus();
+              }}
+            >
+              {props.name}
+            </p>
           }
         >
           <input
             type="text"
+            ref={setInputElementRef}
             placeholder={props.name}
             onChange={(event) => {
+              setShowTaskNameAsInput(false);
               props.updateTodoItem(
                 props.id,
                 props.isComplete,
                 event.currentTarget.value,
               );
-              setShowTaskNameAsInput(false);
             }}
           >
             {props.name}
