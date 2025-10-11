@@ -8,13 +8,13 @@ const TaskCard = (props) => {
   setTaskStatus(props.isComplete === "true" ? "Complete" : "Incomplete");
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="w-sm border-2 bg-stone-200 m-2 text-center">
+    <div className="flex flex-col w-sm m-4 items-center justify-center">
+      <div className="border-2 bg-stone-200 my-2 w-full text-center">
         <Show
-          className="w-xs m-2"
           when={showTaskNameAsInput()}
           fallback={
             <p
+              className="p-2 text-center"
               onClick={() => {
                 setShowTaskNameAsInput(true);
                 inputElementRef().focus();
@@ -24,10 +24,11 @@ const TaskCard = (props) => {
             </p>
           }
         >
-          <input
+          <textarea
+            className="text-center m-2 w-5/6"
             type="text"
             ref={setInputElementRef}
-            placeholder={props.name}
+            value={props.name}
             onChange={(event) => {
               setShowTaskNameAsInput(false);
               props.updateTodoItem(
@@ -38,7 +39,7 @@ const TaskCard = (props) => {
             }}
           >
             {props.name}
-          </input>
+          </textarea>
         </Show>
         <p>{taskStatus()}</p>
         <button

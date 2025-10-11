@@ -3,9 +3,8 @@ const CreateTaskCard = (props) => {
     <div className="flex flex-col items-center justify-center">
       <div className="w-sm border-2 bg-stone-200 m-2 text-center">
         <input
-          className="w-sm"
+          className="w-80 text p-2 m-2"
           type="text"
-          className="text"
           placeholder="Task Name"
           onChange={(event) =>
             props.postTodoItem(event.currentTarget.value, "false")
