@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Show } from "solid-js";
+import { createSignal, Show } from "solid-js";
 
 const TaskCard = (props) => {
   const [showTaskNameAsInput, setShowTaskNameAsInput] = createSignal(false);
@@ -9,15 +9,14 @@ const TaskCard = (props) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="w-sm border-2 bg-stone-200 m-2 text-center">
-        <p>{props.id}</p>
         <Show
+          className="w-xs m-2"
           when={showTaskNameAsInput()}
           fallback={
             <p onClick={() => setShowTaskNameAsInput(true)}>{props.name}</p>
           }
         >
           <input
-            className="w-xs m-2"
             type="text"
             placeholder={props.name}
             onChange={(event) => {

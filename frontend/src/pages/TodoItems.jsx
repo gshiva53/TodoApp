@@ -6,11 +6,11 @@ import CreateTaskCard from "./CreateTaskCard";
 // 	save the task.
 // - When the task name is clicked then it changes into input field and
 // 	sends an update request on input focus change.
-// . User can mark the task complete or incomplete.
+// - User can mark the task complete or incomplete.
 // . The task cards are responsive - md/lg task cards for bigger screens
 // 	sm cards for smaller screens
 // . New task can't be created with an empty name.
-// . Do users need to see the Id of the task ?
+// - Do users need to see the Id of the task ?
 // . The Create/Delete/Update buttons should show the status of the
 // 	request maybe ?
 // .
