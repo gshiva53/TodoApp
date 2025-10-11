@@ -1,7 +1,10 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 
 const TaskCard = (props) => {
   const [showTaskNameAsInput, setShowTaskNameAsInput] = createSignal(false);
+  const [taskStatus, setTaskStatus] = createSignal(null);
+
+  setTaskStatus(props.isComplete === "true" ? "Complete" : "Incomplete");
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -17,15 +20,28 @@ const TaskCard = (props) => {
             className="w-xs m-2"
             type="text"
             placeholder={props.name}
-            onChange={(e) => {
-              props.updateTodoItem(props.id, props.isComplete, e);
+            onChange={(event) => {
+              props.updateTodoItem(
+                props.id,
+                props.isComplete,
+                event.currentTarget.value,
+              );
               setShowTaskNameAsInput(false);
             }}
           >
             {props.name}
           </input>
         </Show>
-        <p>{props.isComplete}</p>
+        <p>{taskStatus()}</p>
+        <button
+          className="bg-blue-200 text-center p-2 m-2"
+          onClick={() => {
+            const isComplete = props.isComplete === "false" ? "true" : "false";
+            props.updateTodoItem(props.id, isComplete, props.name);
+          }}
+        >
+          Change Task Status
+        </button>
         <button
           className="bg-blue-200 text-center p-2 m-2"
           onClick={[props.deleteTodoItem, props.id]}

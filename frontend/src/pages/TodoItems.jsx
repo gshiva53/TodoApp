@@ -4,7 +4,7 @@ import CreateTaskCard from "./CreateTaskCard";
 
 // 3. Editing the task and clicking save should send the put request to
 // 	save the task.
-// . When the task name is clicked then it changes into input field and
+// - When the task name is clicked then it changes into input field and
 // 	sends an update request on input focus change.
 // . User can mark the task complete or incomplete.
 // . The task cards are responsive - md/lg task cards for bigger screens
@@ -44,7 +44,7 @@ const TodoItems = () => {
     }
   };
 
-  const updateTodoItem = async (id, isComplete, inputEvent) => {
+  const updateTodoItem = async (id, isComplete, name) => {
     const boolIsComplete = isComplete === "false" ? false : true;
 
     const req = {
@@ -54,7 +54,7 @@ const TodoItems = () => {
       },
       body: JSON.stringify({
         id: Number(id),
-        name: String(inputEvent.target.value),
+        name: String(name),
         isComplete: boolIsComplete,
       }),
     };
