@@ -14,8 +14,8 @@ import CreateTaskCard from "./CreateTaskCard";
 // . The Create/Delete/Update buttons should show the status of the
 // 	request maybe ?
 // .
-// . User can create a new task which is then posted and saved.
-// . user can mark the task complete or incomplete
+// - User can create a new task which is then posted and saved.
+// - user can mark the task complete or incomplete
 // . Filter tasks by the complete and incompleted tasks
 const TodoItems = () => {
   const [postError, setPostError] = createSignal(null);
