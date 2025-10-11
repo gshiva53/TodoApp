@@ -27,7 +27,8 @@ sudo docker run -p 3001:3000 -d todoapp-frontend
 ## Note
 
 The Dockerfile images created using these dockerfiles are not optimised and may consume more resources than required. The dockerfiles can be optimised by:
--> Using multi-stage builds
--> Copying the output required for the next stage and removing the build tools
--> Using package manager (pnpm) caches for shorter build times if images need to be rebuild again.
--> Security considerations
+
+- Using multi-stage builds
+- Copying the output required for the next stage and removing the build tools
+- Using package manager (pnpm) caches for shorter build times if images need to be rebuild again.
+- Security considerations
