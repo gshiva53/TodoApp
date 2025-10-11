@@ -167,7 +167,10 @@ const TodoItems = () => {
         Create Task
       </button>
       <Show when={showCreateTaskComponent()}>
-        <CreateTaskCard postTodoItem={postTodoItem} />
+        <CreateTaskCard
+          postTodoItem={postTodoItem}
+          setShowCreateTaskComponent={setShowCreateTaskComponent}
+        />
       </Show>
       <For each={todos()} fallback={<div>Loading...</div>}>
         {(todo) => (

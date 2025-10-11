@@ -6,9 +6,10 @@ const CreateTaskCard = (props) => {
           className="w-80 text p-2 m-2"
           type="text"
           placeholder="Task Name"
-          onChange={(event) =>
-            props.postTodoItem(event.currentTarget.value, "false")
-          }
+          onChange={(event) => {
+            props.setShowCreateTaskComponent(false);
+            props.postTodoItem(event.currentTarget.value, "false");
+          }}
         ></input>
       </div>
     </div>
