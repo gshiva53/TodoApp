@@ -8,7 +8,7 @@ builder.Services.AddCors(options =>
         options.AddPolicy(name: corsPolicyName,
             policy =>
             {
-                policy.WithOrigins("http://192.168.4.24:3001")
+                policy.WithOrigins(["http://192.168.4.24:3001", "http://192.168.4.24:3000"])
         .AllowAnyHeader()
     .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             });

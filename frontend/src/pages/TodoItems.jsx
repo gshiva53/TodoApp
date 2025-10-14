@@ -159,12 +159,26 @@ const TodoItems = () => {
   const [todos, { refetch }] = createResource(fetchTodoItems);
 
   return (
-    <div>
+    <div className="flex flex-col items-center bg-slate-50">
+      {/* Plus icon inside button */}
       <button
-        class="bg-blue-200 p-2 m-4 w-sm"
+        class="bg-slate-300 p-2 m-4 w-12 h-12 rounded-full"
         onClick={() => setShowCreateTaskComponent(!showCreateTaskComponent())}
       >
-        Create Task
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-8"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
       </button>
       <Show when={showCreateTaskComponent()}>
         <CreateTaskCard

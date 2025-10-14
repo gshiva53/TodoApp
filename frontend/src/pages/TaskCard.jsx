@@ -8,8 +8,8 @@ const TaskCard = (props) => {
   setTaskStatus(props.isComplete === "true" ? "Complete" : "Incomplete");
 
   return (
-    <div className="flex flex-col w-sm m-4 items-center justify-center">
-      <div className="border-2 bg-stone-200 my-2 w-full text-center">
+    <div className="flex flex-col w-sm m-2 items-center justify-center">
+      <div className="border-2 bg-stone-200 m-2 w-full text-center">
         <Show
           when={showTaskNameAsInput()}
           fallback={

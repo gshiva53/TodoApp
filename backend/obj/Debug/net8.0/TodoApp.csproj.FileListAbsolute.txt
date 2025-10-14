@@ -89,3 +89,13 @@
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/TodoApp.genruntimeconfig.cache
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/ref/TodoApp.dll
 /home/shiva/TodoApp/backend/obj/Debug/net8.0/TodoApp.sourcelink.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/publish/web.config
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/web.config
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/appsettings.Development.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/appsettings.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/publish/appsettings.Development.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/publish/appsettings.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/publish/TodoApp.deps.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/publish/TodoApp.runtimeconfig.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/TodoApp.deps.json
+/home/shiva/TodoApp/backend/bin/Debug/net8.0/publish/TodoApp.runtimeconfig.json

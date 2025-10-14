@@ -1,7 +1,5 @@
 const App = (props) => {
-  return (
-    <div class="flex flex-col items-center bg-amber-100">{props.children}</div>
-  );
+  return <div class="flex justify-center bg-slate-100">{props.children}</div>;
 };
 
 export default App;
