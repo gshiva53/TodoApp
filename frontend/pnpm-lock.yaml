@@ -14,6 +14,9 @@ importers:
       '@solidjs/router':
         specifier: ^0.15.3
         version: 0.15.3(solid-js@1.9.9)
+      solid-heroicons:
+        specifier: ^3.2.4
+        version: 3.2.4(solid-js@1.9.9)
       solid-js:
         specifier: ^1.9.9
         version: 1.9.9
@@ -873,6 +876,11 @@ packages:
     resolution: {integrity: sha512-LTyNki6GUJPRLXV5uMWPkYClB07SUMubbr2EkAddiR0CJCF/I283txilMU9RURSr/P8EewMfXWu2o3aWrK7A5A==}
     peerDependencies:
       solid-js: ^1.8
+
+  solid-heroicons@3.2.4:
+    resolution: {integrity: sha512-u6BMdFLvkJnvUGYzdFcWp1wvJ4hb9Y1zd3AbZ9D3bUmmiy9jBzNZX+RcqBCI2EKRvdQwAb1UB9bkESfqfhayDg==}
+    peerDependencies:
+      solid-js: '>= ^1.2.5'
 
   solid-js@1.9.9:
     resolution: {integrity: sha512-A0ZBPJQldAeGCTW0YRYJmt7RCeh5rbFfPZ2aOttgYnctHE7HgKeHCBB/PVc2P7eOfmNXqMFFFoYYdm3S4dcbkA==}
@@ -1747,6 +1755,10 @@ snapshots:
   solid-focus-trap@0.1.9(solid-js@1.9.9):
     dependencies:
       '@corvu/utils': 0.4.2(solid-js@1.9.9)
+      solid-js: 1.9.9
+
+  solid-heroicons@3.2.4(solid-js@1.9.9):
+    dependencies:
       solid-js: 1.9.9
 
   solid-js@1.9.9:
