@@ -42,7 +42,7 @@ const TaskCard = (props) => {
         when={showTaskNameAsInput()}
         fallback={
           <p
-            class="p-2 text-center w-fit max-w-xs overflow-hidden text-ellipsis bg-amber-100"
+            class="p-2 text-center w-fit max-w-xs overflow-hidden text-ellipsis whitespace-pre-wrap"
             onClick={() => {
               setShowTaskNameAsInput(true);
               inputElementRef().focus();
@@ -53,7 +53,7 @@ const TaskCard = (props) => {
         }
       >
         <textarea
-          class="text-center bg-amber-400 field-sizing-content max-w-xs resize-none"
+          class="text-center bg-amber-400 field-sizing-content max-w-xs resize-none whitespace-pre-wrap"
           type="text"
           ref={setInputElementRef}
           value={props.name}
