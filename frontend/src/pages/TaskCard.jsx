@@ -6,6 +6,9 @@ import Popover from "@corvu/popover";
 const TaskCard = (props) => {
   const [inputElementRef, setInputElementRef] = createSignal(null);
   const [showTaskNameAsInput, setShowTaskNameAsInput] = createSignal(false);
+  const [taskIsComplete, setTaskIsComplete] = createSignal(null);
+
+  setTaskIsComplete(() => (props.isComplete === "true" ? true : false));
 
   return (
     <div
@@ -24,15 +27,35 @@ const TaskCard = (props) => {
         >
           <Popover.Trigger>
             <span>
-              <Icon path={ellipsisVertical} class="size-6 bg-amber-300" />
+              <Icon path={ellipsisVertical} class="size-6" />
             </span>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Content class="z-50 rounded-sm bg-slate-50 p-2">
-              <button>
-                <Icon path={trash} class="size-6" />
-              </button>
-              <Popover.Arrow />
+            <Popover.Content class="drop-shadow-lg rounded-sm bg-slate-50 p-2">
+              <div class="flex flex-col">
+                <button
+                  class="p-0.5"
+                  onClick={() => {
+                    const isComplete =
+                      props.isComplete === "false" ? "true" : "false";
+                    props.updateTodoItem(props.id, isComplete, props.name);
+                  }}
+                >
+                  <Show
+                    when={taskIsComplete()}
+                    fallback={<Icon path={xMark} class="size-6" />}
+                  >
+                    <Icon path={check} class="size-6" />
+                  </Show>
+                </button>
+                <button
+                  class="p-0.5"
+                  onClick={[props.deleteTodoItem, props.id]}
+                >
+                  <Icon path={trash} class="size-6" />
+                </button>
+              </div>
+              <Popover.Arrow class="drop-shadow-lg text-slate-50" />
             </Popover.Content>
           </Popover.Portal>
         </Popover>
@@ -53,7 +76,7 @@ const TaskCard = (props) => {
         }
       >
         <textarea
-          class="text-center bg-amber-400 field-sizing-content max-w-xs resize-none whitespace-pre-wrap"
+          class="text-center field-sizing-content max-w-xs resize-none whitespace-pre-wrap"
           type="text"
           ref={setInputElementRef}
           value={props.name}
@@ -69,21 +92,6 @@ const TaskCard = (props) => {
           {props.name}
         </textarea>
       </Show>
-      <button
-        class="bg-blue-200 text-center p-2 m-2"
-        onClick={() => {
-          const isComplete = props.isComplete === "false" ? "true" : "false";
-          props.updateTodoItem(props.id, isComplete, props.name);
-        }}
-      >
-        Change Task Status
-      </button>
-      <button
-        class="bg-blue-200 text-center p-2 m-2"
-        onClick={[props.deleteTodoItem, props.id]}
-      >
-        Delete Task
-      </button>
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import { createResource, createSignal, For, Show } from "solid-js";
+import { Icon } from "solid-heroicons";
+import { plus } from "solid-heroicons/outline";
 import TaskCard from "./TaskCard";
 import CreateTaskCard from "./CreateTaskCard";
 
@@ -159,26 +161,13 @@ const TodoItems = () => {
   const [todos, { refetch }] = createResource(fetchTodoItems);
 
   return (
-    <div className="flex flex-col items-center bg-slate-50">
+    <div className="flex flex-col items-center">
       {/* Plus icon inside button */}
       <button
         class="bg-slate-300 p-2 m-4 w-12 h-12 rounded-full"
         onClick={() => setShowCreateTaskComponent(!showCreateTaskComponent())}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-8"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
+        <Icon path={plus} />
       </button>
       <Show when={showCreateTaskComponent()}>
         <CreateTaskCard
