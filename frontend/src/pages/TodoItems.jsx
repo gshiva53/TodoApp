@@ -1,4 +1,5 @@
 import { createResource, createSignal, For, Show } from "solid-js";
+import { API_URL } from "../index.jsx";
 import { Icon } from "solid-heroicons";
 import { plus } from "solid-heroicons/outline";
 import TaskCard from "./TaskCard";
@@ -26,7 +27,7 @@ const TodoItems = () => {
 
   const fetchTodoItems = async () => {
     try {
-      let response = await fetch("http://192.168.4.24:5000/todoitems");
+      let response = await fetch(`${API_URL}`);
 
       if (!response.ok) {
         throw new Error(
@@ -62,10 +63,7 @@ const TodoItems = () => {
     };
 
     try {
-      let response = await fetch(
-        `http://192.168.4.24:5000/todoitems/${id}`,
-        req,
-      );
+      let response = await fetch(`${API_URL}${id}`, req);
 
       if (!response.ok) {
         throw new Error(
@@ -103,7 +101,7 @@ const TodoItems = () => {
     };
 
     try {
-      let response = await fetch("http://192.168.4.24:5000/todoitems", req);
+      let response = await fetch(`${API_URL}`, req);
 
       if (!response.ok) {
         throw new Error(
@@ -132,10 +130,7 @@ const TodoItems = () => {
     };
 
     try {
-      let response = await fetch(
-        `http://192.168.4.24:5000/todoitems/${id}`,
-        req,
-      );
+      let response = await fetch(`${API_URL}${id}`, req);
 
       if (!response.ok) {
         throw new Error(

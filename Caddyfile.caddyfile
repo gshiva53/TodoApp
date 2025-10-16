@@ -1,0 +1,18 @@
+todo.guptashiva.dev {
+	encode gzip zstd
+
+	# HTTPS for the backend service
+	handle /todoitems/* {
+		reverse_proxy localhost:5000
+	}
+
+	# HTTPS for the frontend service
+	handle {
+		reverse_proxy localhost:3001
+	}
+
+	log {
+		level INFO
+		format console
+	}
+}

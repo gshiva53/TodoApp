@@ -22,10 +22,10 @@ app.UseCors(corsPolicyName);
 
 var todoitems = app.MapGroup("/todoitems").RequireCors(corsPolicyName);
 
-todoitems.MapGet("", GetAllTodos);
+todoitems.MapGet("/", GetAllTodos);
 todoitems.MapGet("/complete", GetCompletedTodos);
 todoitems.MapGet("/{id}", GetTodoFromId);
-todoitems.MapPost("", PostTodo);
+todoitems.MapPost("/", PostTodo);
 todoitems.MapPut("/{id}", UpdateTodo);
 todoitems.MapDelete("/{id}", DeleteTodo).RequireCors(corsPolicyName);
 

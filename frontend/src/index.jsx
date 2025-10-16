@@ -10,6 +10,9 @@ import NotFound from "./pages/NotFound";
 
 const root = document.getElementById("root");
 
+export const API_URL = "https://todo.guptashiva.dev/todoitems/";
+// export const API_URL_DEV = "http://192.168.4.24:5000/todoitems/";
+
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   throw new Error(
     "Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got misspelled?",
