@@ -5,7 +5,6 @@ import TaskCard from "./TaskCard";
 import CreateTaskCard from "./CreateTaskCard";
 import { useApiContext } from "./ApiContextProvider";
 
-// . Change the Task Name component to use text area.
 // . Add Error boundarys to the main page.
 // . Add Suspend to the main page.
 

@@ -1,9 +1,16 @@
 import { ApiContextProvider } from "./pages/ApiContextProvider";
+import { ErrorBoundary } from "solid-js";
 
 const App = (props) => {
   return (
     <ApiContextProvider>
-      <div class="flex justify-center bg-slate-100 h-lvh">{props.children}</div>
+      <ErrorBoundary
+        fallback={(error) => <p>Error Occured: {error.message}</p>}
+      >
+        <div class="flex justify-center bg-slate-100 h-lvh">
+          {props.children}
+        </div>
+      </ErrorBoundary>
     </ApiContextProvider>
   );
 };
