@@ -38,7 +38,7 @@ const TaskCard = () => {
         }
       >
         <textarea
-          class="text-center field-sizing-content max-w-xs resize-none whitespace-pre-wrap"
+          class="text-center field-sizing-content max-w-xs resize-none outline-none whitespace-pre-wrap"
           type="text"
           ref={setInputElementRef}
           value={todo.name}
