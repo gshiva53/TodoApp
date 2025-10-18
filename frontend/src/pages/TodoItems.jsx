@@ -1,19 +1,33 @@
-import { createSignal, For, Show } from "solid-js";
+import { useContext, createContext, createSignal, For, Show } from "solid-js";
 import { Icon } from "solid-heroicons";
 import { plus } from "solid-heroicons/outline";
 import TaskCard from "./TaskCard";
 import CreateTaskCard from "./CreateTaskCard";
-import { useApiFunctions } from "./ApiContextProvider";
-
+import { useApiContext } from "./ApiContextProvider";
 // . Modularise components
 // . Change the Task Name component to use text area.
 // . Add Error boundarys to the main page.
 // . Add Suspend to the main page.
+
+export const TodoContext = createContext();
+
+export const TodoContextProvider = (props) => {
+  return (
+    <TodoContext.Provider value={props.todo}>
+      {props.children}
+    </TodoContext.Provider>
+  );
+};
+
+export function useTodoContext() {
+  return useContext(TodoContext);
+}
+
 const TodoItems = () => {
   const [showCreateTaskComponent, setShowCreateTaskComponent] =
     createSignal(false);
 
-  const api = useApiFunctions();
+  const api = useApiContext();
 
   return (
     <div className="flex flex-col items-center">
@@ -29,15 +43,21 @@ const TodoItems = () => {
           setShowCreateTaskComponent={setShowCreateTaskComponent}
         />
       </Show>
+
       <For each={api.todos()} fallback={<div>Loading...</div>}>
         {(todo) => (
-          <TaskCard
-            id={String(todo.id)}
-            name={String(todo.name)}
-            isComplete={String(todo.isComplete)}
-          />
+          <TodoContextProvider
+            todo={{
+              id: String(todo.id),
+              name: String(todo.name),
+              isComplete: String(todo.isComplete),
+            }}
+          >
+            <TaskCard />
+          </TodoContextProvider>
         )}
       </For>
+
       <Show when={api.postError()}>
         <p>{api.postError()}</p>
       </Show>

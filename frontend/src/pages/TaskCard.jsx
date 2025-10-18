@@ -2,16 +2,18 @@ import { createSignal, Show } from "solid-js";
 import { Icon } from "solid-heroicons";
 import { trash, check, xMark, ellipsisVertical } from "solid-heroicons/outline";
 import Popover from "@corvu/popover";
-import { useApiFunctions } from "./ApiContextProvider";
+import { useApiContext } from "./ApiContextProvider";
+import { useTodoContext } from "./TodoItems";
 
-const TaskCard = (props) => {
+const TaskCard = () => {
   const [inputElementRef, setInputElementRef] = createSignal(null);
   const [showTaskNameAsInput, setShowTaskNameAsInput] = createSignal(false);
   const [taskIsComplete, setTaskIsComplete] = createSignal(null);
 
-  setTaskIsComplete(() => (props.isComplete === "true" ? true : false));
+  const api = useApiContext();
+  const todo = useTodoContext();
 
-  const api = useApiFunctions();
+  setTaskIsComplete(() => (todo.isComplete === "true" ? true : false));
 
   return (
     <div
@@ -40,8 +42,8 @@ const TaskCard = (props) => {
                   class="p-0.5"
                   onClick={() => {
                     const isComplete =
-                      props.isComplete === "false" ? "true" : "false";
-                    api.updateTodoItem(props.id, isComplete, props.name);
+                      todo.isComplete === "false" ? "true" : "false";
+                    api.updateTodoItem(todo.id, isComplete, todo.name);
                   }}
                 >
                   <Show
@@ -51,7 +53,7 @@ const TaskCard = (props) => {
                     <Icon path={check} class="size-6" />
                   </Show>
                 </button>
-                <button class="p-0.5" onClick={[api.deleteTodoItem, props.id]}>
+                <button class="p-0.5" onClick={[api.deleteTodoItem, todo.id]}>
                   <Icon path={trash} class="size-6" />
                 </button>
               </div>
@@ -71,7 +73,7 @@ const TaskCard = (props) => {
               inputElementRef().focus();
             }}
           >
-            {props.name}
+            {todo.name}
           </p>
         }
       >
@@ -79,17 +81,17 @@ const TaskCard = (props) => {
           class="text-center field-sizing-content max-w-xs resize-none whitespace-pre-wrap"
           type="text"
           ref={setInputElementRef}
-          value={props.name}
+          value={todo.name}
           onBlur={(event) => {
             setShowTaskNameAsInput(false);
             api.updateTodoItem(
-              props.id,
-              props.isComplete,
+              todo.id,
+              todo.isComplete,
               event.currentTarget.value,
             );
           }}
         >
-          {props.name}
+          {todo.name}
         </textarea>
       </Show>
     </div>

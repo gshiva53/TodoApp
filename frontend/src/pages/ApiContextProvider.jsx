@@ -152,8 +152,8 @@ const ApiContextProvider = (props) => {
   );
 };
 
-function useApiFunctions() {
+function useApiContext() {
   return useContext(ApiContext);
 }
 
-export { ApiContext, ApiContextProvider, useApiFunctions };
+export { ApiContext, ApiContextProvider, useApiContext };

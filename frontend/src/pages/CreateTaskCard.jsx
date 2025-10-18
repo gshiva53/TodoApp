@@ -1,7 +1,7 @@
-import { useApiFunctions } from "./ApiContextProvider";
+import { useApiContext } from "./ApiContextProvider";
 
 const CreateTaskCard = (props) => {
-  const api = useApiFunctions();
+  const api = useApiContext();
   return (
     <div className="flex flex-col items-center m-2 justify-center">
       <div className="w-sm bg-slate-300 text-center">
