@@ -1,5 +1,7 @@
+import { useApiFunctions } from "./ApiContextProvider";
+
 const CreateTaskCard = (props) => {
-  // TODO: Close the Task name input on Blur
+  const api = useApiFunctions();
   return (
     <div className="flex flex-col items-center m-2 justify-center">
       <div className="w-sm bg-slate-300 text-center">
@@ -9,7 +11,7 @@ const CreateTaskCard = (props) => {
           placeholder="Task Name"
           onChange={(event) => {
             props.setShowCreateTaskComponent(false);
-            props.postTodoItem(event.currentTarget.value, "false");
+            api.postTodoItem(event.currentTarget.value, "false");
           }}
         ></input>
       </div>

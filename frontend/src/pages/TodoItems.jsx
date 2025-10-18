@@ -26,7 +26,6 @@ const TodoItems = () => {
       </button>
       <Show when={showCreateTaskComponent()}>
         <CreateTaskCard
-          postTodoItem={api.postTodoItem}
           setShowCreateTaskComponent={setShowCreateTaskComponent}
         />
       </Show>
@@ -35,10 +34,7 @@ const TodoItems = () => {
           <TaskCard
             id={String(todo.id)}
             name={String(todo.name)}
-            postTodoItem={api.postTodoItem}
             isComplete={String(todo.isComplete)}
-            deleteTodoItem={api.deleteTodoItem}
-            updateTodoItem={api.updateTodoItem}
           />
         )}
       </For>

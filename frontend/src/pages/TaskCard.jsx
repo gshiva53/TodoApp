@@ -2,6 +2,7 @@ import { createSignal, Show } from "solid-js";
 import { Icon } from "solid-heroicons";
 import { trash, check, xMark, ellipsisVertical } from "solid-heroicons/outline";
 import Popover from "@corvu/popover";
+import { useApiFunctions } from "./ApiContextProvider";
 
 const TaskCard = (props) => {
   const [inputElementRef, setInputElementRef] = createSignal(null);
@@ -10,12 +11,14 @@ const TaskCard = (props) => {
 
   setTaskIsComplete(() => (props.isComplete === "true" ? true : false));
 
+  const api = useApiFunctions();
+
   return (
     <div
       classList={{
         "flex flex-col w-sm p-2 m-2 items-center relative bg-slate-300 rounded-sm": true,
         // Set the border when task is incomplete
-        "border-l-4 border-slate-600": props.isComplete === "false",
+        "border-l-4 border-slate-600": taskIsComplete(),
       }}
     >
       <div class="absolute right-1 top-1">
@@ -38,7 +41,7 @@ const TaskCard = (props) => {
                   onClick={() => {
                     const isComplete =
                       props.isComplete === "false" ? "true" : "false";
-                    props.updateTodoItem(props.id, isComplete, props.name);
+                    api.updateTodoItem(props.id, isComplete, props.name);
                   }}
                 >
                   <Show
@@ -48,10 +51,7 @@ const TaskCard = (props) => {
                     <Icon path={check} class="size-6" />
                   </Show>
                 </button>
-                <button
-                  class="p-0.5"
-                  onClick={[props.deleteTodoItem, props.id]}
-                >
+                <button class="p-0.5" onClick={[api.deleteTodoItem, props.id]}>
                   <Icon path={trash} class="size-6" />
                 </button>
               </div>
@@ -82,7 +82,7 @@ const TaskCard = (props) => {
           value={props.name}
           onBlur={(event) => {
             setShowTaskNameAsInput(false);
-            props.updateTodoItem(
+            api.updateTodoItem(
               props.id,
               props.isComplete,
               event.currentTarget.value,
