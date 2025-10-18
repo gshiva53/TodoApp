@@ -6,6 +6,16 @@ services:
     image: todoapp-frontend
     ports: 
       - "3001:3000"
+    develop: 
+        watch: 
+          - action: sync
+            path: ./frontend/src
+            target: /TodoApp/frontend/src
+          - action: rebuild
+            path: ./frontend
+            target: /TodoApp/frontend
+            ignore: 
+              - node_modules/ 
 
   backend: 
     build: ./backend
