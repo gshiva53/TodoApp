@@ -6,7 +6,6 @@ import CreateTaskCard from "./CreateTaskCard";
 import { useApiFunctions } from "./ApiContextProvider";
 
 // . Modularise components
-// . Make the  color apply to the whole <page></page>
 // . Change the Task Name component to use text area.
 // . Add Error boundarys to the main page.
 // . Add Suspend to the main page.
