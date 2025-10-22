@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 const string corsPolicyName = "AllowSpecificOrigin";
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("Todo") ?? "Data Source=Todo.db";
+
 builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: corsPolicyName,
@@ -13,9 +15,9 @@ builder.Services.AddCors(options =>
     .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             });
     });
-builder.Services.AddDbContext<TodoDb>(
-        opt => opt.UseInMemoryDatabase("TodoList")
-    );
+
+builder.Services.AddDbContext<TodoDb>(options => options.UseSqlite(connectionString));
+
 var app = builder.Build();
 
 app.UseCors(corsPolicyName);

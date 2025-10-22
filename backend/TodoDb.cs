@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
-class TodoDb : DbContext {
-    public TodoDb(DbContextOptions<TodoDb> options) : base(options) 
+class TodoDb : DbContext
+{
+    public TodoDb(DbContextOptions<TodoDb> options) : base(options)
     {
 
     }
 
-    public DbSet<Todo> Todos => Set<Todo>(); 
+    public DbSet<Todo> Todos { get; set; }
 }
