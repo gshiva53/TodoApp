@@ -7,7 +7,7 @@ const App = (props) => {
       <ErrorBoundary
         fallback={(error) => <p>Error Occured: {error.message}</p>}
       >
-        <div class="flex justify-center bg-slate-100 h-lvh">
+        <div class="flex justify-center bg-slate-100 min-h-lvh">
           {props.children}
         </div>
       </ErrorBoundary>
