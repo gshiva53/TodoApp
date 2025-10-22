@@ -49,6 +49,11 @@ CodeCoverage/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# Sqlite Db files
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+
 # NUnit
 *.VisualState.xml
 TestResult.xml
