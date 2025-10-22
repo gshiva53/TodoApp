@@ -1,4 +1,4 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, onCleanup, Show } from "solid-js";
 import { useApiContext } from "./ApiContextProvider";
 import { useTodoContext } from "./TodoItems";
 import FloatingMenu from "./FloatingMenu";
@@ -12,6 +12,16 @@ const TaskCard = () => {
   const todo = useTodoContext();
 
   setTaskIsComplete(() => (todo.isComplete === "true" ? true : false));
+
+  function handleEventRemoval() {
+    console.log("Input event removed");
+  }
+
+  onCleanup(() => {
+    // inputElementRef().removeEventListener("input", handleEventRemoval);
+    console.log(inputElementRef());
+    console.log("Cleanup called on Task Card");
+  });
 
   return (
     <div

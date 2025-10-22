@@ -43,7 +43,7 @@ const TodoItems = () => {
         />
       </Show>
 
-      <For each={api.todos()} fallback={<div>Loading...</div>}>
+      <For each={api.todos()} fallback={<p>Loading...</p>}>
         {(todo) => (
           <TodoContextProvider
             todo={{
