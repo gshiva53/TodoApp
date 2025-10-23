@@ -5,7 +5,10 @@ const App = (props) => {
   return (
     <ApiContextProvider>
       <ErrorBoundary
-        fallback={(error) => <p>Error Occured: {error.message}</p>}
+        fallback={(error) => {
+          console.log(`${error}`);
+          return <p>Error Occured: {error.message}</p>;
+        }}
       >
         <div class="flex justify-center bg-slate-100 min-h-lvh">
           {props.children}

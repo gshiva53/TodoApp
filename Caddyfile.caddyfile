@@ -2,11 +2,11 @@ todo.guptashiva.dev {
 	encode gzip zstd
 
 	@backend {
-		path /todoitems/*
-		path /register
-		path /login
-		path /logout
-		path /openapi/*
+		path /backend/todoitems/*
+		path /backend/register
+		path /backend/login
+		path /backend/logout
+		path /backend/openapi/*
 	}
 
 	handle @backend {

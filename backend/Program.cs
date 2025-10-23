@@ -7,7 +7,7 @@ const string corsPolicyName = "AllowSpecificOrigin";
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Todo") ?? "Data Source=Todo.db";
 
-builder.Services.AddOpenApi("internal");
+builder.Services.AddOpenApi();
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<TodoAppIdentityDb>();
@@ -31,7 +31,7 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager, [FromBody] object empty) =>
+app.MapPost("/backend/logout", async (SignInManager<IdentityUser> signInManager, [FromBody] object empty) =>
 {
     if (empty != null)
     {
@@ -42,11 +42,12 @@ app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager, [FromBo
 }).RequireCors(corsPolicyName)
     .RequireAuthorization();
 
-app.MapOpenApi();
-app.UseCors(corsPolicyName);
-app.MapIdentityApi<IdentityUser>();
+app.MapOpenApi("/backend/openapi/");
 
-var todoitems = app.MapGroup("/todoitems")
+app.UseCors(corsPolicyName);
+app.MapGroup("/backend").MapIdentityApi<IdentityUser>();
+
+var todoitems = app.MapGroup("/backend/todoitems")
     .RequireCors(corsPolicyName);
 
 todoitems.RequireAuthorization();

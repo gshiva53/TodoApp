@@ -5,7 +5,7 @@ import {
   createResource,
 } from "solid-js";
 
-const API_URL = "https://todo.guptashiva.dev/todoitems/";
+const API_URL = "https://todo.guptashiva.dev/backend/todoitems/";
 
 const ApiContext = createContext();
 const [postError, setPostError] = createSignal(null);
