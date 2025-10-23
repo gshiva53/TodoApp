@@ -13,16 +13,6 @@ const TaskCard = () => {
 
   setTaskIsComplete(() => (todo.isComplete === "true" ? true : false));
 
-  function handleEventRemoval() {
-    console.log("Input event removed");
-  }
-
-  onCleanup(() => {
-    // inputElementRef().removeEventListener("input", handleEventRemoval);
-    console.log(inputElementRef());
-    console.log("Cleanup called on Task Card");
-  });
-
   return (
     <div
       classList={{
