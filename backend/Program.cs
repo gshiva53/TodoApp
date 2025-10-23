@@ -1,9 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 const string corsPolicyName = "AllowSpecificOrigin";
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Todo") ?? "Data Source=Todo.db";
+
+builder.Services.AddOpenApi("internal");
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<TodoAppIdentityDb>();
 
 builder.Services.AddCors(options =>
     {
@@ -18,11 +25,31 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContext<TodoDb>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddDbContext<TodoAppIdentityDb>(options => options.UseInMemoryDatabase("TodoAppIdentityDb"));
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
-app.UseCors(corsPolicyName);
+app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager, [FromBody] object empty) =>
+{
+    if (empty != null)
+    {
+        await signInManager.SignOutAsync();
+        return TypedResults.Ok();
+    }
+    return Results.Unauthorized();
+}).RequireCors(corsPolicyName)
+    .RequireAuthorization();
 
-var todoitems = app.MapGroup("/todoitems").RequireCors(corsPolicyName);
+app.MapOpenApi();
+app.UseCors(corsPolicyName);
+app.MapIdentityApi<IdentityUser>();
+
+var todoitems = app.MapGroup("/todoitems")
+    .RequireCors(corsPolicyName);
+
+todoitems.RequireAuthorization();
 
 todoitems.MapGet("/", GetAllTodos);
 todoitems.MapGet("/complete", GetCompletedTodos);
